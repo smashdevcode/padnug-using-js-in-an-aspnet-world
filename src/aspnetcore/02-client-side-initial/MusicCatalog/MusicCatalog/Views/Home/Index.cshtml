@@ -1,0 +1,59 @@
+﻿@model HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "Music Catalog";
+}
+
+<div class="columns">
+    <div class="column">
+        <form method="get">
+            <div class="columns">
+                <div class="column">
+                    <input asp-for="SearchQuery" class="input is-medium" placeholder="Enter search query..." />
+                </div>
+                <div class="column is-narrow">
+                    <div class="select is-medium">
+                        <select asp-for="SearchCategory" asp-items="Model.CategorySelectList">
+                            <option value="">Select a category...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="column is-narrow">
+                    <button class="button is-primary is-medium" type="submit">Search</button>&nbsp;
+                    <a asp-controller="Home" asp-action="Index" class="button is-warning is-medium">Clear</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model.Albums.Count > 0)
+{
+    <div class="columns is-multiline">
+        @foreach (var album in Model.Albums)
+        {
+            <div class="column is-half">
+                <div class="box">
+                    <div class="columns">
+                        <div class="column">
+                            <figure class="image is-square">
+                                <img src="~/img/@(album.Id).png" alt="@album.Title" />
+                            </figure>
+                        </div>
+                        <div class="column">
+                            <h2 class="title">@album.Title</h2>
+                            <h3 class="subtitle">@album.Artist</h3>
+                            <div>
+                                Category: @album.Category
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div>Sorry... no results were found that matched your search criteria.</div>
+}

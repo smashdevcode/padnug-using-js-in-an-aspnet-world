@@ -1,0 +1,34 @@
+﻿@model HomeClientSideViewModel
+
+@{
+    ViewData["Title"] = "Music Catalog (Client-Side)";
+}
+
+<div class="columns">
+    <div class="column">
+        <form method="get">
+            <div class="columns">
+                <div class="column">
+                    <input asp-for="SearchQuery" class="input is-medium" placeholder="Enter search query..." />
+                </div>
+                <div class="column is-narrow">
+                    <div class="select is-medium">
+                        <select asp-for="SearchCategory" asp-items="Model.CategorySelectList">
+                            <option value="">Select a category...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="column is-narrow">
+                    <button id="Search" class="button is-primary is-medium" type="submit">Search</button>&nbsp;
+                    <button id="Clear" class="button is-warning is-medium">Clear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="SearchResults"></div>
+
+@section Scripts {
+    <script src="~/js/search.js" asp-append-version="true"></script>
+}
